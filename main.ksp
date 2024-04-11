@@ -1,0 +1,395 @@
+{***********************************************
+Eastern Bliss - Balkan & Oriental Sounds
+Author: Lazura Muisc
+Written by: Taffo Velikoff
+Modified: April 11, 2024
+*************************************************}
+
+on init
+    make_perfview
+    set_ui_height_px(298)
+    set_ui_width_px(633)
+    declare $mouse_resp := -900
+    set_control_par_str($INST_WALLPAPER_ID,$CONTROL_PAR_PICTURE,"instrumentbackground")
+
+    declare $ii := 0
+
+    { REPLIKA DELAY }
+
+    declare ui_slider $send_replika_amount(50000,500000)
+    make_persistent($send_replika_amount)
+    declare $k_send_replika_amount
+    $k_send_replika_amount := get_ui_id($send_replika_amount)
+    set_control_par_str($k_send_replika_amount,$CONTROL_PAR_PICTURE,"MK2-64")
+    set_control_par($k_send_replika_amount,$CONTROL_PAR_POS_X,15)
+    set_control_par($k_send_replika_amount,$CONTROL_PAR_POS_Y,164)
+    set_control_par($k_send_replika_amount,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_slider $send_replika_feedback(0,1000000)
+    make_persistent($send_replika_feedback)
+    declare $k_send_replika_feedback
+    $k_send_replika_feedback := get_ui_id($send_replika_feedback)
+    set_control_par_str($k_send_replika_feedback,$CONTROL_PAR_PICTURE,"MK2-64")
+    set_control_par($k_send_replika_feedback,$CONTROL_PAR_POS_X,80)
+    set_control_par($k_send_replika_feedback,$CONTROL_PAR_POS_Y,164)
+    set_control_par($k_send_replika_feedback,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_slider $send_replika_lowcut(0,1000000)
+    make_persistent($send_replika_lowcut)
+    declare $k_send_replika_lowcut
+    $k_send_replika_lowcut := get_ui_id($send_replika_lowcut)
+    set_control_par_str($k_send_replika_lowcut,$CONTROL_PAR_PICTURE,"MK2-64")
+    set_control_par($k_send_replika_lowcut,$CONTROL_PAR_POS_X,145)
+    set_control_par($k_send_replika_lowcut,$CONTROL_PAR_POS_Y,164)
+    set_control_par($k_send_replika_lowcut,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_slider $send_replika_hicut(0,1000000)
+    make_persistent($send_replika_hicut)
+    declare $k_send_replika_hicut
+    $k_send_replika_hicut := get_ui_id($send_replika_hicut)
+    set_control_par_str($k_send_replika_hicut,$CONTROL_PAR_PICTURE,"MK2-64")
+    set_control_par($k_send_replika_hicut,$CONTROL_PAR_POS_X,210)
+    set_control_par($k_send_replika_hicut,$CONTROL_PAR_POS_Y,164)
+    set_control_par($k_send_replika_hicut,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_switch $send_replika_toggle
+    make_persistent($send_replika_toggle)
+    declare $k_send_replika_toggle
+    $k_send_replika_toggle := get_ui_id($send_replika_toggle)
+    set_control_par_str($k_send_replika_toggle, $CONTROL_PAR_TEXT, "")
+    set_control_par_str($k_send_replika_toggle, $CONTROL_PAR_PICTURE, "switch")
+    set_control_par($k_send_replika_toggle, $CONTROL_PAR_POS_X, 264)
+    set_control_par($k_send_replika_toggle, $CONTROL_PAR_POS_Y, 166)
+    set_control_par($k_send_replika_toggle, $CONTROL_PAR_WIDTH, 56)
+    set_control_par($k_send_replika_toggle, $CONTROL_PAR_HEIGHT, 56)
+    set_control_par($k_send_replika_toggle, $CONTROL_PAR_MOUSE_BEHAVIOUR, $mouse_resp)
+
+    { CONVOLUTION REVERB }
+
+    declare ui_slider $send_rev_amount(50000,500000)
+    make_persistent($send_rev_amount)
+    declare $k_send_rev_amount
+    $k_send_rev_amount := get_ui_id($send_rev_amount)
+    set_control_par_str($k_send_rev_amount,$CONTROL_PAR_PICTURE,"MK2-64")
+    set_control_par($k_send_rev_amount,$CONTROL_PAR_POS_X,355)
+    set_control_par($k_send_rev_amount,$CONTROL_PAR_POS_Y,164)
+    set_control_par($k_send_rev_amount,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_slider $send_rev_predelay(0,1000000)
+    make_persistent($send_rev_predelay)
+    declare $k_send_rev_predelay
+    $k_send_rev_predelay := get_ui_id($send_rev_predelay)
+    set_control_par_str($k_send_rev_predelay,$CONTROL_PAR_PICTURE,"MK2-64")
+    set_control_par($k_send_rev_predelay,$CONTROL_PAR_POS_X,420)
+    set_control_par($k_send_rev_predelay,$CONTROL_PAR_POS_Y,164)
+    set_control_par($k_send_rev_predelay,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_slider $send_rev_hipass(0,1000000)
+    make_persistent($send_rev_hipass)
+    declare $k_send_rev_hipass
+    $k_send_rev_hipass := get_ui_id($send_rev_hipass)
+    set_control_par_str($k_send_rev_hipass,$CONTROL_PAR_PICTURE,"MK2-64")
+    set_control_par($k_send_rev_hipass,$CONTROL_PAR_POS_X,485)
+    set_control_par($k_send_rev_hipass,$CONTROL_PAR_POS_Y,164)
+    set_control_par($k_send_rev_hipass,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_slider $send_rev_lowpass(0,1000000)
+    make_persistent($send_rev_lowpass)
+    declare $k_send_rev_lowpass
+    $k_send_rev_lowpass := get_ui_id($send_rev_lowpass)
+    set_control_par_str($k_send_rev_lowpass,$CONTROL_PAR_PICTURE,"MK2-64")
+    set_control_par($k_send_rev_lowpass,$CONTROL_PAR_POS_X,550)
+    set_control_par($k_send_rev_lowpass,$CONTROL_PAR_POS_Y,164)
+    set_control_par($k_send_rev_lowpass,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_switch $send_rev_toggle
+    make_persistent($send_rev_toggle)
+    declare $k_send_rev_toggle
+    $k_send_rev_toggle := get_ui_id($send_rev_toggle)
+    set_control_par_str($k_send_rev_toggle, $CONTROL_PAR_TEXT, "")
+    set_control_par_str($k_send_rev_toggle, $CONTROL_PAR_PICTURE, "switch")
+    set_control_par($k_send_rev_toggle, $CONTROL_PAR_POS_X, 308)
+    set_control_par($k_send_rev_toggle, $CONTROL_PAR_POS_Y, 166)
+    set_control_par($k_send_rev_toggle, $CONTROL_PAR_WIDTH, 56)
+    set_control_par($k_send_rev_toggle, $CONTROL_PAR_HEIGHT, 56)
+    set_control_par($k_send_rev_toggle, $CONTROL_PAR_MOUSE_BEHAVIOUR, $mouse_resp)
+
+    { ASDR }
+
+    declare ui_slider $mod_attack(0,1000000)
+    make_persistent($mod_attack)
+    declare $k_mod_attack
+    $k_mod_attack := get_ui_id($mod_attack)
+    set_control_par_str($k_mod_attack,$CONTROL_PAR_PICTURE,"greybevel-36")
+    set_control_par($k_mod_attack,$CONTROL_PAR_POS_X,235)
+    set_control_par($k_mod_attack,$CONTROL_PAR_POS_Y,85)
+    set_control_par($k_mod_attack,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_slider $mod_decay(0,1000000)
+    make_persistent($mod_decay)
+    declare $k_mod_decay
+    $k_mod_decay := get_ui_id($mod_decay)
+    set_control_par_str($k_mod_decay,$CONTROL_PAR_PICTURE,"greybevel-36")
+    set_control_par($k_mod_decay,$CONTROL_PAR_POS_X,280)
+    set_control_par($k_mod_decay,$CONTROL_PAR_POS_Y,85)
+    set_control_par($k_mod_decay,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_slider $mod_sustain(0,1000000)
+    make_persistent($mod_sustain)
+    declare $k_mod_sustain
+    $k_mod_sustain := get_ui_id($mod_sustain)
+    set_control_par_str($k_mod_sustain,$CONTROL_PAR_PICTURE,"greybevel-36")
+    set_control_par($k_mod_sustain,$CONTROL_PAR_POS_X,325)
+    set_control_par($k_mod_sustain,$CONTROL_PAR_POS_Y,85)
+    set_control_par($k_mod_sustain,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare ui_slider $mod_release(0,1000000)
+    make_persistent($mod_release)
+    declare $k_mod_release
+    $k_mod_release := get_ui_id($mod_release)
+    set_control_par_str($k_mod_release,$CONTROL_PAR_PICTURE,"greybevel-36")
+    set_control_par($k_mod_release,$CONTROL_PAR_POS_X,370)
+    set_control_par($k_mod_release,$CONTROL_PAR_POS_Y,85)
+    set_control_par($k_mod_release,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    { TRANSPOSE }
+    declare polyphonic $transposition
+    declare polyphonic $transposed_note
+    
+    declare ui_slider $semi (-11, 11)
+    declare ui_slider $octave (-2, 2)
+
+    make_persistent ($semi)
+    make_persistent ($octave)
+    
+    $semi := 0
+    $octave := 0
+
+    declare ui_label $label_octave(1,1) { OCTAVE LABEL }
+    declare $k_label_octave
+    $k_label_octave := get_ui_id($label_octave)
+    set_text($label_octave, $octave)
+    hide_part($label_octave, $HIDE_PART_BG)
+    set_control_par($k_label_octave,$CONTROL_PAR_POS_X,487)
+    set_control_par($k_label_octave,$CONTROL_PAR_POS_Y,131)
+
+    declare ui_label $label_semi(1,1) { TRANSPOSE LABEL }
+    declare $k_label_semi
+    $k_label_semi := get_ui_id($label_semi)
+    set_text($label_semi, $octave)
+    hide_part($label_semi, $HIDE_PART_BG)
+    set_control_par($k_label_semi,$CONTROL_PAR_POS_X,559)
+    set_control_par($k_label_semi,$CONTROL_PAR_POS_Y,131)
+
+    declare $k_octave
+    $k_octave := get_ui_id($octave)
+    set_control_par_str($k_octave,$CONTROL_PAR_PICTURE,"greybevel-octave")
+    set_control_par($k_octave,$CONTROL_PAR_POS_X,466)
+    set_control_par($k_octave,$CONTROL_PAR_POS_Y,85)
+    set_control_par($k_octave,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    declare $k_semi
+    $k_semi := get_ui_id($semi)
+    set_control_par_str($k_semi,$CONTROL_PAR_PICTURE,"greybevel-transpose")
+    set_control_par($k_semi,$CONTROL_PAR_POS_X,538)
+    set_control_par($k_semi,$CONTROL_PAR_POS_Y,85)
+    set_control_par($k_semi,$CONTROL_PAR_MOUSE_BEHAVIOUR,$mouse_resp)
+
+    { KEY COLORS }
+
+    declare $key_counter
+    declare $start_mapped_note
+    declare $total_mapped_notes
+    declare $draw_key_offset
+    declare $draw_key_start
+    declare $draw_key_end
+
+    make_persistent($key_counter)
+    make_persistent($start_mapped_note)
+    make_persistent($total_mapped_notes)
+    make_persistent($draw_key_offset)
+    make_persistent($draw_key_start)
+    make_persistent($draw_key_end)
+
+    $start_mapped_note := 48
+    $total_mapped_notes := 37
+
+    $key_counter := 0
+    $draw_key_offset := $octave * 12
+    $draw_key_start := $start_mapped_note + ($draw_key_offset * -1) + $semi
+    $draw_key_end := $draw_key_start + $total_mapped_notes
+
+    while ($key_counter < 127)
+
+        if($key_counter <= $draw_key_start)
+            set_key_color($key_counter, $KEY_COLOR_INACTIVE)
+        end if
+
+        if ($key_counter >= $draw_key_start and $key_counter < $draw_key_end)
+            set_key_color($key_counter, $KEY_COLOR_YELLOW)
+        end if
+
+        if ($key_counter >= $draw_key_end)
+            set_key_color($key_counter, $KEY_COLOR_INACTIVE)
+        end if
+
+        inc($key_counter)
+
+    end while
+
+end on
+
+on ui_control($send_replika_amount)
+    set_engine_par($ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN, $send_replika_amount, -1, 0, $NI_SEND_BUS)
+end on
+
+on ui_control($send_replika_feedback)
+    set_engine_par($ENGINE_PAR_RDL_FEEDBACK, $send_replika_feedback, -1, 0, $NI_SEND_BUS)
+end on
+
+on ui_control($send_replika_lowcut)
+    set_engine_par($ENGINE_PAR_RDL_LOWCUT, $send_replika_lowcut, -1, 0, $NI_SEND_BUS)
+end on
+
+on ui_control($send_replika_hicut)
+    set_engine_par($ENGINE_PAR_RDL_HIGHCUT, $send_replika_hicut, -1, 0, $NI_SEND_BUS)
+end on
+
+on ui_control($send_rev_amount)
+    set_engine_par($ENGINE_PAR_SEND_EFFECT_OUTPUT_GAIN, $send_rev_amount, -1, 1, $NI_SEND_BUS)
+end on
+
+on ui_control($send_rev_predelay)
+    set_engine_par($ENGINE_PAR_IRC_PREDELAY, $send_rev_predelay, -1, 1, $NI_SEND_BUS)
+end on
+
+on ui_control($send_rev_hipass)
+    set_engine_par($ENGINE_PAR_IRC_FREQ_HIGHPASS_LR, $send_rev_hipass, -1, 1, $NI_SEND_BUS)
+end on
+
+on ui_control($send_rev_lowpass)
+    set_engine_par($ENGINE_PAR_IRC_FREQ_LOWPASS_LR, $send_rev_lowpass, -1, 1, $NI_SEND_BUS)
+end on
+
+on ui_control($mod_attack)
+    $ii := 0
+    while ($ii < $NUM_GROUPS)
+        set_engine_par($ENGINE_PAR_ATTACK, $mod_attack, $ii, 0, -1)
+        inc ($ii)
+    end while
+end on
+
+on ui_control($mod_sustain)
+    $ii := 0
+    while ($ii < $NUM_GROUPS)
+        set_engine_par($ENGINE_PAR_SUSTAIN, $mod_sustain, $ii, 0, -1)
+        inc ($ii)
+    end while
+end on
+
+on ui_control($mod_decay)
+    $ii := 0
+    while ($ii < $NUM_GROUPS)
+        set_engine_par($ENGINE_PAR_DECAY, $mod_decay, $ii, 0, -1)
+        inc ($ii)
+    end while
+end on
+
+on ui_control($mod_release)
+    $ii := 0
+    while ($ii < $NUM_GROUPS)
+        set_engine_par($ENGINE_PAR_RELEASE, $mod_release, $ii, 0, -1)
+        inc ($ii)
+    end while
+end on
+
+on ui_control($send_replika_toggle)
+    if($send_replika_toggle = 0)
+        set_engine_par($ENGINE_PAR_SEND_EFFECT_BYPASS, 0, -1, 0, $NI_SEND_BUS)
+    else
+        set_engine_par($ENGINE_PAR_SEND_EFFECT_BYPASS, 1, -1, 0, $NI_SEND_BUS)
+    end if
+end on
+
+on ui_control($send_rev_toggle)
+    if($send_rev_toggle = 0)
+        set_engine_par($ENGINE_PAR_SEND_EFFECT_BYPASS, 0, -1, 1, $NI_SEND_BUS)
+    else
+        set_engine_par($ENGINE_PAR_SEND_EFFECT_BYPASS, 1, -1, 1, $NI_SEND_BUS)
+    end if
+end on
+
+on ui_control($octave)
+    set_text($label_octave, $octave)
+
+    $key_counter := 0
+    $draw_key_offset := $octave * 12
+    $draw_key_start := $start_mapped_note + ($draw_key_offset * -1) + $semi
+    $draw_key_end := $draw_key_start + $total_mapped_notes
+
+    while ($key_counter < 127)
+
+        if($key_counter <= $draw_key_start)
+            set_key_color($key_counter, $KEY_COLOR_INACTIVE)
+        end if
+
+        if ($key_counter >= $draw_key_start and $key_counter < $draw_key_end)
+            set_key_color($key_counter, $KEY_COLOR_YELLOW)
+        end if
+
+        if ($key_counter >= $draw_key_end)
+            set_key_color($key_counter, $KEY_COLOR_INACTIVE)
+        end if
+
+        inc($key_counter)
+
+    end while
+end on
+
+on ui_control($semi)
+    set_text($label_semi, $semi)
+
+    $key_counter := 0
+    $draw_key_offset := $octave * 12
+    $draw_key_start := $start_mapped_note + ($draw_key_offset * -1) + $semi
+    $draw_key_end := $draw_key_start + $total_mapped_notes
+
+    while ($key_counter < 127)
+
+        if($key_counter <= $draw_key_start)
+            set_key_color($key_counter, $KEY_COLOR_INACTIVE)
+        end if
+
+        if ($key_counter >= $draw_key_start and $key_counter < $draw_key_end)
+            set_key_color($key_counter, $KEY_COLOR_YELLOW)
+        end if
+
+        if ($key_counter >= $draw_key_end)
+            set_key_color($key_counter, $KEY_COLOR_INACTIVE)
+        end if
+
+        inc($key_counter)
+
+    end while
+end on
+
+on note
+    
+    { TRANSPOSE ACTION }
+
+    ignore_event ($EVENT_ID)
+    
+    $transposition := ($octave * 12) + $semi
+    $transposed_note := $EVENT_NOTE + $transposition
+    
+    if ($transposed_note < 0)
+        $transposed_note := 0
+    end if
+    
+    if ($transposed_note > 127)
+        $transposed_note := 127
+    end if
+    
+    play_note ($transposed_note, $EVENT_VELOCITY, 0, -1)
+
+end on
